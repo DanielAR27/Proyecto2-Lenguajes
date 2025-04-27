@@ -1,0 +1,18 @@
+# Archivos y carpetas generados automáticamente por Stack
+.stack-work/
+dist/
+*.hi
+*.o
+*.obj
+
+# Bases de datos locales de Stack
+stack.sqlite3
+stack.sqlite3.pantry-write-lock
+
+# Archivos de VSCode
+.vscode/
+
+# Otros
+*.exe
+*.out
+*.log
