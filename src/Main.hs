@@ -2,7 +2,7 @@
 module Main where
 
 import System.IO
-import User
+import User (registerUser, loginUser, waitForEnter, confirmAction)
 import Password
 import UI
 
@@ -24,9 +24,22 @@ mainLoop = do
         "2" -> do
             success <- loginUser
             if success
-                then passwordMenu
+                then do
+                    passwordMenu
+                    mainLoop  -- Volver al menú principal después de cerrar sesión
                 else mainLoop
-        "3" -> putStrLn "¡Gracias por usar el administrador de contraseñas!"
+        "3" -> do
+            clearScreen
+            confirmed <- confirmAction "¿Está seguro que desea salir del programa? (s/n): "
+            if confirmed
+                then do
+                    clearScreen
+                    putStrLn "¡Gracias por usar el administrador de contraseñas!"
+                    putStrLn "Hasta luego!"
+                    waitForEnter
+                else mainLoop
         _   -> do
+            clearScreen
             putStrLn "Opción inválida. Intente de nuevo."
+            waitForEnter
             mainLoop
